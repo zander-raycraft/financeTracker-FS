@@ -7,6 +7,8 @@ function App() {
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordconfValue, setPasswordConfValue] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordConfVisible, setPasswordConfVisible] = useState(false);
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
 
   const handleInputChange = (propertyName: string) => (
     event: ChangeEvent<HTMLInputElement>
@@ -27,9 +29,14 @@ function App() {
       default:
         break;
     }
+
+    if (propertyName === 'password' || propertyName === 'passwordconf') {
+      setPasswordsMatch(passwordValue === passwordconfValue);
+    }
   };
 
   const isPasswordEmpty = passwordValue.trim() === '';
+  const isPasswordConfEmpty = passwordconfValue.trim() === '';
 
   return (
     <div className="App">
@@ -78,12 +85,22 @@ function App() {
           </div>
 
           {/* Password verification information */}
-          <input
-            type="password"
-            value={passwordconfValue}
-            onChange={handleInputChange('passwordconf')}
-            placeholder="Confirm password"
-          />
+          <div className="input-container">
+            <input
+              type={passwordConfVisible ? 'text' : 'password'}
+              value={passwordconfValue}
+              onChange={handleInputChange('passwordconf')}
+              placeholder="Confirm password"
+            />
+            {isPasswordConfEmpty ? null : (
+              <button
+                className="toggle-password"
+                onClick={() => setPasswordConfVisible(!passwordConfVisible)}
+              >
+                {passwordConfVisible ? 'Hide' : 'Show'}
+              </button>
+            )}
+          </div>
         </div>
         <div className='login-page-container'></div>
       </div>
