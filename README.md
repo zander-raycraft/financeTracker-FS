@@ -1,4 +1,4 @@
-<h1>💰 Personal Finance Budgeter </h1>
+<h1>💰 Personal Finance Budgeter [DISCONTINUED] </h1>
 
 ![Production Status](https://img.shields.io/badge/Production%20State-In%20Progress-orange)
 
